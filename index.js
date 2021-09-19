@@ -35,15 +35,39 @@ submitBtn.addEventListener("click", async (e) => {
     console.log(textSent, polarity, type);
     writeSentimentToDom(polarity, textSent, type, textSentiment[1]);
     textBoxContent.value = " ";
+
     removeLoader();
   } catch (error) {
     removeLoader();
-    alert(
-      "We are sorry there may have been an error,  Make sure you have inserted Text into the textbox, otherwise comeback later... " +
-        error
-    );
+    // alert(
+    //   "We are sorry there may have been an error,  Make sure you have inserted Text into the textbox, otherwise comeback later... " +
+    //     error
+    // );
+    displayError(error);
   }
 });
+
+function displayError(error) {
+  const polarityDom = document.querySelector("#polarity");
+  const userTextDom = document.querySelector("#text-sent");
+  const userTextTypeDom = document.querySelector("#text-type");
+  const statusDom = document.querySelector("#status");
+  const showResultDiv = document.querySelector("#reuslt-div");
+
+  polarityDom.textContent = "Error";
+  polarityDom.style.color = "red";
+  userTextDom.textContent = "Error";
+  userTextDom.style.color = "red";
+  userTextTypeDom.textContent = "Error";
+  userTextTypeDom.style.color = "red";
+  statusDom.textContent =
+    " We are sorry there may have been an error,  Make sure you have inserted Text into the textbox, otherwise comeback later...  " +
+    `Error: ${error}`;
+  statusDom.style.color = "red";
+
+  // Bonus
+  //   showResultDiv.append(httpStatusImage(httpStatus));
+}
 
 function writeSentimentToDom(polarity, textSent, type, httpStatus) {
   const polarityDom = document.querySelector("#polarity");
@@ -53,19 +77,30 @@ function writeSentimentToDom(polarity, textSent, type, httpStatus) {
   const showResultDiv = document.querySelector("#reuslt-div");
 
   polarityDom.textContent = " " + polarity;
+  polarityDom.style.color = displayPolarityColor(polarity);
   userTextDom.textContent = " " + textSent;
   userTextTypeDom.textContent = " " + type;
-  userTextTypeDom.style.color = displayPolarityColor(type);
+  userTextTypeDom.style.color = displayTypeColor(type);
   statusDom.textContent = " " + httpStatus;
 
   // Bonus
   showResultDiv.append(httpStatusImage(httpStatus));
 }
 
-function displayPolarityColor(type) {
+function displayTypeColor(type) {
   if (type === "positive") {
     return "green";
   } else if (type === "negative") {
+    return "red";
+  } else {
+    return "grey";
+  }
+}
+
+function displayPolarityColor(polarity) {
+  if (polarity > 0) {
+    return "green";
+  } else if (polarity < 0) {
     return "red";
   } else {
     return "grey";

@@ -30,15 +30,25 @@ body {
   border-right: 3px solid white;
   padding: 10px;
   text-align: center;
+  padding-right: 50px;
+  padding-left: 100px;
+  margin-top: -10px;
 }
 
 .result {
   display: block;
   width: 50%;
-  margin-left: 50px;
+  /* margin-left: px; */
+  padding-left: 100px;
   text-align: left;
   transition: all 0.5s;
   /* opacity: 0; */
+}
+
+#title-results {
+  text-align: left;
+  margin-left: 0px;
+  font-family: "Fira Code", monospace;
 }
 
 #btn {
