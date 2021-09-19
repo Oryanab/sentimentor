@@ -79,9 +79,11 @@ function writeSentimentToDom(polarity, textSent, type, httpStatus) {
   polarityDom.textContent = " " + polarity;
   polarityDom.style.color = displayPolarityColor(polarity);
   userTextDom.textContent = " " + textSent;
+  userTextDom.style.color = "white";
   userTextTypeDom.textContent = " " + type;
   userTextTypeDom.style.color = displayTypeColor(type);
   statusDom.textContent = " " + httpStatus;
+  statusDom.style.color = "white";
 
   // Bonus
   showResultDiv.append(httpStatusImage(httpStatus));
